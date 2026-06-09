@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Todoアプリ</title>
+</head>
+<body>
+
+  <h1>Todoアプリ</h1>
+
+  <input type="text" id="title" placeholder="タスク名">
+  <button onclick="sendTodo()">送信</button>
+
+  <script>
+    async function sendTodo() {
+
+      const title = document.getElementById('title').value;
+
+      const response = await fetch('/api/todos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify({
+          title: title,
+          completed: false
+        })
+      });
+
+      const data = await response.json();
+
+      console.log(data);
+    }
+  </script>
+
+</body>
+</html>
